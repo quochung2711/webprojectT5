@@ -23,6 +23,13 @@
 
         <!-- Custom Fonts -->
         <link href="<c:url value ="/style/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
+        
+        <link href="<c:url value ="/style/css/validate.css"/>" rel="stylesheet" type="text/css">
+         <style>
+		label.error{
+			color: red;
+		}
+		</style>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,24 +48,27 @@
                             <h3 class="panel-title">Register</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form">
+                            <form role="form"  id="form-1" >
                                 <fieldset>
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="User name" name="" type="text" autofocus>
+                                   <div class="form-group" >                                       
+                                        <input id="username" class="form-control" placeholder="User name" name="username" type="text" autofocus>
+                                        <span  class="form-message" ></span>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="E-mail" name="" type="email" autofocus>
+                                        <input id="email" class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                        <span  class="form-message" ></span>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="" type="password" value="">
+                                        <input id="password" class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <span  class="form-message" ></span>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Re Password" name="" type="password" value="">
+                                        <input id="repassword" class="form-control" placeholder="Re Password" name="repassword" type="password" value="">
+                                        <span  class="form-message" ></span>
                                     </div>
-                                    <!-- Change this to a button or input when using this as a form -->
                                     <button type="submit" class="btn btn-lg btn-success btn-block">Register</button>
                                     <br />
-                                    <a href="login.html">Click here to login</a>
+                                    <a href="<c:url value="/view/login.jsp"/>">Click here to login</a>
                                 </fieldset>
                             </form>
                         </div>
@@ -78,6 +88,62 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="../js/startmin.js"></script>
+        
+        <script src="<c:url value ="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"/>"></script>
+		<script src="<c:url value ="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"/>" type="text/javascript"></script>
+	  
+        <script>
+        $().ready(function() {
+        	$("#form-1").validate({
+        		onfocusout: false,
+        		onkeyup: false,
+        		onclick: false,
+        		rules: {
+        			"username": {
+        				required: true,
+        				maxlength: 30,
+        				minlength: 3
+        			},
+        			"email": {
+        				required: true,
+        				minlength: 5
+        			},
+        			"password": {
+        				required: true,
+        				maxlength: 30,
+        				minlength: 8
+        			},
+        			"repassword": {
+        				equalTo:"#password",
+        				maxlength: 30,
+        				minlength: 8
+        			},
+        		},
+        		messages: {
+        			"username": {
+        				required: "Username is required",
+        				maxlength: "Max 30 charater",
+        				minlength: "Min 3 charater"
+        			},
+        			"email": {
+        				required: "Email is required",
+        				minlength: "Min 5 charater"
+        			},
+        			"password": {
+        				required: "Password is required",
+        				maxlength:"Max 30 charater",
+        				minlength: "Min 8 charater"
+        			},
+        			"repassword": {
+        				equalTo:"Password must common",
+        				maxlength:"Max 30 charater",
+        				minlength: "Min 8 charater"
+        			},
+        		}
+        	});
+        	
+        });
+        </script>
 
     </body>
 </html>
