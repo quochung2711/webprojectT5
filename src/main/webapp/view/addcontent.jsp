@@ -12,7 +12,11 @@
 
         <!-- Custom Fonts -->
         <link href="<c:url value ="/style/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
-
+		<style>
+		label.error{
+			color: red;
+		}
+		</style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -38,15 +42,15 @@
 									<form name ="addcontent" id="addcontent" action="${pageContext.request.contextPath}/add-content" method="post">
 										<div class="form-group">
 											<label>Title</label> <input class="form-control"
-												placeholder="Enter the title" name ="title">
+												placeholder="Enter the title" name ="title" id ="title">
 										</div>
 										<div class="form-group">
 											<label>Brief</label>
-											<textarea class="form-control" rows="3" name ="brief"></textarea>
+											<textarea class="form-control" rows="3" name ="brief" id ="brief"></textarea>
 										</div>
 										<div class="form-group">
 											<label>Content</label>
-											<textarea class="form-control" rows="8" name ="content"></textarea>
+											<textarea class="form-control" rows="8" name ="content" id="content"></textarea>
 										</div>
 										<button type="submit" class="btn btn-default">Submit
 											Button</button>
@@ -81,3 +85,52 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="<c:url value ="/style/js/startmin.js"/>"></script>
+        <script src="<c:url value ="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"/>"></script>
+	<script src="<c:url value ="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"/>" type="text/javascript"></script>
+	  
+	    
+	  
+        <script>
+        $().ready(function() {
+        	$("#addcontent").validate({
+        		onfocusout: false,
+        		onkeyup: false,
+        		onclick: false,
+        		rules: {
+        			"title": {
+        				required: true,
+        				maxlength: 200,
+        				minlength: 10
+        			},
+        			"brief": {
+        				required: true,
+        				maxlength: 150,
+        				minlength: 30
+        			},
+        			"content": {
+        				required: true,
+        				maxlength: 1000,
+        				minlength: 50
+        			},
+        		},
+        		messages: {
+        			"title": {
+        				required: "Title is required",
+        				maxlength: "Max 200 character",
+        				minlength: "Min 10 character"
+        			},
+        			"brief": {
+        				required: "Brief is required",
+        				maxlength:"Max 150 character",
+        				minlength: "Min 30 character"
+        			},
+        			"content": {
+        				required: "Content is required",
+        				maxlength:"Max 1000 character",
+        				minlength: "Min 50 character"
+        			},
+        		}
+        	});
+        	
+        });
+        </script>
